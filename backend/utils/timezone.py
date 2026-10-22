@@ -27,7 +27,7 @@ class TimeZone:
         else:
             self.tz_info = zoneinfo.ZoneInfo(settings.DATETIME_TIMEZONE)
 
-    def now(self) -> datetime:
+    def current(self) -> datetime:
         """获取当前时区时间"""
         return datetime.now(self.tz_info)
 
