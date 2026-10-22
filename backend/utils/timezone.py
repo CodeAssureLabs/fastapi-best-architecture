@@ -62,7 +62,7 @@ class TimeZone:
         return t.strftime(format_str)
 
     @staticmethod
-    def to_utc(t: datetime | int) -> datetime:
+    def to_utc(t: datetime | int | float) -> datetime:
         """
         将 datetime 对象或时间戳转换为 UTC 时区时间
 
