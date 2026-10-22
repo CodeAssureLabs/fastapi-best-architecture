@@ -37,7 +37,7 @@ class DictTypeService:
         :return:
         """
         dict_datas = await dict_type_dao.get_all(db)
-        return dict_datas
+        return sorted(dict_datas, key=lambda dict_type: dict_type.code)
 
     @staticmethod
     async def get_list(*, db: AsyncSession, name: str | None, code: str | None) -> dict[str, Any]:
