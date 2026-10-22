@@ -103,6 +103,9 @@ def select_join_serialize(  # ruff:ignore[complex-structure]
     :param return_as_dict: True 返回字典，False 返回 namedtuple
     :return:
     """
+    if row is None:
+        return None
+
     list_relationship_types = {'o2m', 'm2m'}
     all_relationship_types = {'o2m', 'm2o', 'o2o', 'm2m'}
 
