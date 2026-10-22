@@ -70,7 +70,7 @@ def recursive_to_tree(nodes: list[dict[str, Any]], *, parent_id: int | None = No
 
 def get_tree_data(
     row: Sequence[RowData],
-    build_type: BuildTreeType = BuildTreeType.traversal,
+    build_type: BuildTreeType,
     *,
     parent_id: int | None = None,
     is_sort: bool = True,
