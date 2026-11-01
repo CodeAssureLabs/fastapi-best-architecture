@@ -14,7 +14,7 @@ from backend.database.redis import redis_client
 router = APIRouter()
 
 
-@router.get('', summary='获取在线用户', dependencies=[DependsSuperUser])
+@router.get('', summary='获取在线用户')
 async def get_sessions(
     username: Annotated[str | None, Query(description='用户名')] = None,
 ) -> ResponseSchemaModel[list[GetTokenDetail]]:
