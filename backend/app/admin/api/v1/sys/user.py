@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Body, Depends, Path, Query, Request
+from fastapi import APIRouter, Body, Depends, Path, Query, Request, Response
 
 from backend.app.admin.schema.role import GetRoleDetail
 from backend.app.admin.schema.user import (
@@ -62,6 +62,16 @@ async def get_users_paginated(
 ) -> ResponseSchemaModel[PageData[GetUserInfoWithRelationDetail]]:
     page_data = await user_service.get_list(db=db, dept=dept, username=username, phone=phone, status=status)
     return response_base.success(data=page_data)
+
+
+@router.get('/export', summary='导出所有用户为 CSV', dependencies=[DependsJwtAuth])
+async def export_users(db: CurrentSession) -> Response:
+    csv_data = await user_service.export_users_csv(db=db)
+    return Response(
+        content=csv_data,
+        media_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename=users.csv'},
+    )
 
 
 @router.post('', summary='创建用户', dependencies=[DependsSuperUser])
