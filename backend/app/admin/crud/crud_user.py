@@ -66,6 +66,10 @@ class CRUDUser(CRUDPlus[User]):
         """
         return await self.select_models(db, username__in=usernames, deleted=0)
 
+    async def get_all_for_export(self, db: AsyncSession) -> Sequence[User]:
+        """获取所有用户用于 CSV 导出"""
+        return await self.select_models(db, deleted=0)
+
     async def get_by_nickname(self, db: AsyncSession, nickname: str) -> User | None:
         """
         通过昵称获取用户

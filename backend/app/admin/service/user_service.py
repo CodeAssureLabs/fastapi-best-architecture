@@ -31,6 +31,20 @@ class UserService:
     """用户服务类"""
 
     @staticmethod
+    async def export_users_csv(*, db: AsyncSession) -> str:
+        """导出所有用户为 CSV（供管理后台下载）"""
+        import csv
+        import io
+
+        users = await user_dao.get_all_for_export(db)
+        buffer = io.StringIO()
+        writer = csv.writer(buffer)
+        writer.writerow(['id', 'username', 'nickname', 'email', 'phone', 'status'])
+        for u in users:
+            writer.writerow([u.id, u.username, u.nickname, u.email, u.phone, u.status])
+        return buffer.getvalue()
+
+    @staticmethod
     async def get_userinfo(*, db: AsyncSession, pk: int | None = None, username: str | None = None) -> User:
         """
         获取用户信息
