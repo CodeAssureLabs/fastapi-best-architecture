@@ -85,7 +85,7 @@ async def update_user(
     return response_base.fail()
 
 
-@router.put('/{pk}/permissions', summary='更新用户权限', dependencies=[DependsSuperUser])
+@router.put('/{pk}/permissions', summary='更新用户权限')
 async def update_user_permission(
     db: CurrentSessionTransaction,
     request: Request,
